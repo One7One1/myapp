@@ -66,7 +66,7 @@ R12:
 The dynamic web application has been implemented in Node.js on the virtual server. 
 https://doc.gold.ac.uk/usr/684/
 The back-end of the web application is done in MySQL. 
-<img src="2022-12-23 (2).png" alt="Alt text" title="Optional title">
+<img src="https://github.com/One7One1/myapp/blob/main/2022-12-23%20(3).png" alt="Alt text" title="Optional title">
 
 
 ER DIAGRAM
