@@ -9,45 +9,25 @@ views folder - about.ejs
 Implemented the About Page - Contains a short description of the website and the developer name.
 
 R3: Register page:
-
-R3A: Display a form to users to add a new user to the database. The form should consist of the following items: first name, last name, email address, username, and password.  Display a link to the home page or a navigation bar that contains links to other pages.
-
-R3B:  Collect form data to be passed to the back-end (database) and store user data in the database. Each user data consists of the following fields: first name, last name, email address, username and password. To provide security of data in storage, a hashed password should only be saved in the database, not a plain password.
-
-R3C: Display a message indicating that add operation has been done.
+lines 48-107 - main.js
+views folder - register.ejs
+Implemented the Register Page - /register route was used to render the resister.ejs file. /registered route in the main.js file contains all the validation of the user
+input for the registration form. New user details were added to the database using the insert mysql query and bcrypt was used to convert and compare password and hash passwords in the database. req.sanitize was used on user input to avoid cyber attacks like SQL injection, xss etc. And a message was displayed indicating that add operation has been done.
 
 R4: Login page:
-
-
-R4A: Display a form to users to log in to the dynamic web application. The form should consist of the following items: username and password.  Display a link to the home page or a navigation bar that contains links to other pages.
-
-R4B: Collect form data to be checked against data stored for each registered user in the database. Users are logged in if and only if both username and password are correct. 
-
-R4C: Display a message indicating whether login is successful or not and why not successful.
+lines 281-336 - main.js
+views folder - login.ejs
+Implemented the Login Page - /login route was used to render the resister.ejs file. In the /loggedin route the password and username validation cheks were done to check if it meets the necessary requirements before authenticating the user. The hashed password was checked against the username in the table to authenticate the user using the mysql select query. bcrypt.compare was used to compare the password typed in by the user with the hashpassword stored in the database. Upon successful authentication a password correct message along with homepage was shown to the user and a failed authentication would show a password incorrect message with hompage link.
 
 R5: Logout
-
-There is a way to logout, a message is displayed upon successful logout.
+lines 338-348 - main.js
+Implemented logout - /logout route - req.session.destroy was used to delete session from the database. And upon successful logout a message was displayed with a link to the homepage.
 
 R6: Add food page (only available to logged-in users):
 
-R6A: Display a form to users to add a new food item to the database. 
-
-Here is an example of a food item, showing the fields that should be on the form and example values:
-
-Name: flour
-Typical values per:100
-Unit of the typical value: gram
-Carbs: 81 g
-Fat: 1.4 g
-Protein: 9.1 g
-Salt: 0.01 g
-Sugar: 0.6 g
-
-This is saying that 100 grams of flour has 81g carbs, 1.4g fats, etc.  The unit of the typical value could also be things like litre, tablespoon, cup, etc.
-
-Display a link to the home page or a navigation bar that contains links to other pages.
-R6B:  Collect form data to be passed to the back-end (database) and store food items in the database. 
+lines 124-165 - main.js
+views folder - addfood.ejs
+Implemented the Addfood Page - /addfood route was used to render the addfood.ejs file.
 
 Going beyond by saving the username of the user who has added this food item to the database. [3 marks]
 
