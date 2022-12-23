@@ -11,13 +11,17 @@ Implemented the About Page - Contains a short description of the website and the
 R3: Register page:
 lines 48-107 - main.js
 views folder - register.ejs
-Implemented the Register Page - /register route was used to render the resister.ejs file. /registered route in the main.js file contains all the validation of the user
+Implemented the Register Page - /register route was used to render the resister.ejs file. 
+
+/registered route in the main.js file contains all the validation of the user
 input for the registration form. New user details were added to the database using the insert mysql query and bcrypt was used to convert and compare password and hash passwords in the database. req.sanitize was used on user input to avoid cyber attacks like SQL injection, xss etc. And a message was displayed indicating that add operation has been done.
 
 R4: Login page:
 lines 281-336 - main.js
 views folder - login.ejs
-Implemented the Login Page - /login route was used to render the resister.ejs file. In the /loggedin route the password and username validation cheks were done to check if it meets the necessary requirements before authenticating the user. The hashed password was checked against the username in the table to authenticate the user using the mysql select query. bcrypt.compare was used to compare the password typed in by the user with the hashpassword stored in the database. Upon successful authentication a password correct message along with homepage was shown to the user and a failed authentication would show a password incorrect message with hompage link.
+Implemented the Login Page - /login route was used to render the resister.ejs file. 
+
+In the /loggedin route the password and username validation cheks were done to check if it meets the necessary requirements before authenticating the user. The hashed password was checked against the username in the table to authenticate the user using the mysql select query. bcrypt.compare was used to compare the password typed in by the user with the hashpassword stored in the database. Upon successful authentication a password correct message along with homepage was shown to the user and a failed authentication would show a password incorrect message with hompage link.
 
 R5: Logout
 lines 338-348 - main.js
@@ -27,12 +31,18 @@ R6: Add food page (only available to logged-in users):
 
 lines 124-165 - main.js
 views folder - addfood.ejs
-Implemented the Addfood Page - /addfood route was used to render the addfood.ejs file. /foodadded route does validation checks for all the food values the user wants to add to the database. The user input is added to the database using the SQL query "INSERT INTO table_name ... VALUES ....;".The username of the user entering the food is automatically added to the database using req.session.userid. Upon successfully adding the food to the database a message is displayed with a link to the homepage. 
+Implemented the Addfood Page - /addfood route was used to render the addfood.ejs file. 
+
+/foodadded route does validation checks for all the food values the user wants to add to the database. The user input is added to the database using the SQL query "INSERT INTO table_name ... VALUES ....;".The username of the user entering the food is automatically added to the database using req.session.userid. Upon successfully adding the food to the database a message is displayed with a link to the homepage. 
 
 R7: Search food page 
 lines 19-47 - main.js
 views folder - search.ejs
-Implemented the Search Page - /search route was used to render the search.ejs file. /search-result route is used to render the list.ejs file which displays the searched food item in a tabular format. "SELECT * FROM nutridata WHERE foodprod LIKE '%" + req.query.keyword + "%'"; - displays all the food items even if the complete food name is not searched. The list.ejs file is used to extract data from the database. If the searched food item does not correspond to anything stored in the database the page returns "no data found!" to the user. 
+
+Implemented the Search Page - /search route was used to render the search.ejs file. 
+
+/search-result route is used to render the list.ejs file which displays the searched food item in a tabular format. "SELECT * FROM nutridata WHERE foodprod LIKE '%" + req.query.keyword + "%'"; - displays all the food items even if the complete food name is not searched. 
+The list.ejs file is used to extract data from the database. If the searched food item does not correspond to anything stored in the database the page returns "no data found!" to the user. 
 
 R8: Update food page (only available to logged-in users)
 
@@ -48,19 +58,24 @@ updatesearch.ejs file contains the search form and a link to the homepage. updat
 /deletefoodnow route is used to enable the user who created the food entry into the database to delete the entry from the database. This was made possible using an if else statements and using 2 sql queries.The first SQL query "SELECT username FROM nutridata WHERE id =?"; obtains the username from the table where the food id corresponding to the food being searched for updation is stored. And if the username obtained matches the req.session.userId then the second SQL query "DELETE FROM nutridata WHERE id = ?" is executed, and a message showing successful deletion of entry from database is shown to the user along with a link back to the homepage. If the username does not match the req.session.userId then the user is redirected back to the homepage. This way only the user who made the food entry is allowed to delete the food.
 
 
-R9: List food page (available to all users)
+R9: List food page
+lines 109-122 - main.js
+views folder - list.ejs
 
-R9A: Display all fields for all foods stored in the database. Display a link to the home page or a navigation bar that contains links to other pages.
+The list.ejs file is used to extract data from the database and display it in a tabluar format.
 
-R8B: You can gain more marks for your list page is organised in a tabular format instead of a simple list.
-
-R9C: going beyond by letting users select some food items (e.g. by displaying a checkbox next to each food item and letting the user input the amount of each food item in the recipe e.g. 2x100 g flour). Then collect the name of all selected foods and calculate the sum of the nutritional information related to all selected food items for a recipe or a meal and display them as ‘nutritional information of a recipe or a meal’. Please note, it is not necessary to store recipes or meals in the database. [6.5 marks]
+/list route is used to render the list.ejs file and redirectLogin has been implemented to make this list page available to only loggedin users. The sql query "SELECT * FROM nutridata"; is used to obtain all the details stored in the table.
 
 R10: API
-There is a basic API displayed on '/api' route listing all foods stored in the database in JSON format. i.e. food content can also be accessed as JSON via HTTP method, It should be clear how to access the API (this could include comments in code). Additional credit will be given for an API that implements get, post, put and delete.
+lines 351-381 - main.js
 
-R11: form validation
-All form data has been validated.
+/api route
+sql query "SELECT * FROM nutridata"; is used to display all the data from the database.
+sql query "SELECT * FROM nutridata WHERE foodprod LIKE '%" + req.query.keyword + "%'"; is used to show only details of that food entry which matches the keyword inputed by the user.
+And res.json(result) - is used to display all the data in the json format.
+If - Else statements are used to decide which sql statement to execute depending on user input.
+
+R11: Form Validation - All form data has been validated - /registered, /loggedin, /updatefoodnow, /foodadded.
 
 R12: 
 The dynamic web application has been implemented in Node.js on the virtual server. 
@@ -69,5 +84,5 @@ The back-end of the web application is done in MySQL.
 <img src="https://github.com/One7One1/myapp/blob/main/2022-12-23%20(3).png" alt="Alt text" title="Optional title">
 
 
-ER DIAGRAM
+ENTITY RELATIONSHIP DIAGRAM
 <img src="2022-12-23 (2).png" alt="Alt text" title="Optional title">
