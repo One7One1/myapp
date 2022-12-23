@@ -1,2 +1,2 @@
 ER DIAGRAM
-<img src="/path/to/img.jpg" alt="Alt text" title="Optional title">
+<img src="2022-12-23 (2).png" alt="Alt text" title="Optional title">
