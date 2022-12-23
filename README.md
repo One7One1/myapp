@@ -27,31 +27,26 @@ R6: Add food page (only available to logged-in users):
 
 lines 124-165 - main.js
 views folder - addfood.ejs
-Implemented the Addfood Page - /addfood route was used to render the addfood.ejs file.
-
-Going beyond by saving the username of the user who has added this food item to the database. [3 marks]
-
-R6C: Display a message indicating that add operation has been done.
+Implemented the Addfood Page - /addfood route was used to render the addfood.ejs file. /foodadded route does validation checks for all the food values the user wants to add to the database. The user input is added to the database using the SQL query "INSERT INTO table_name ... VALUES ....;".The username of the user entering the food is automatically added to the database using req.session.userid. Upon successfully adding the food to the database a message is displayed with a link to the homepage. 
 
 R7: Search food page 
-
-R7A: Display a form to users to search for a food item in the database. 'The form should contain just one field - to input the name of the food item'. Display a link to the home page or a navigation bar that contains links to other pages.
-
-R7B:  Collect form data to be passed to the back-end (database) and search the database based on the food name collected from the form. If food found, display a template file (ejs, pug, etc) including data related to the food found in the database to users. Display a message to the user, if not found.
-
-R7C: Going beyond, search food items containing part of the food name as well as the whole food name. As an example, when searching for ‘bread’ display data related to ‘pitta bread’, ‘white bread’, ‘wholemeal bread’, and so on. [6 marks]
+lines 19-47 - main.js
+views folder - search.ejs
+Implemented the Search Page - /search route was used to render the search.ejs file. /search-result route is used to render the list.ejs file which displays the searched food item in a tabular format. "SELECT * FROM nutridata WHERE foodprod LIKE '%" + req.query.keyword + "%'"; - displays all the food items even if the complete food name is not searched. The list.ejs file is used to extract data from the database. If the searched food item does not correspond to anything stored in the database the page returns "no data found!" to the user. 
 
 R8: Update food page (only available to logged-in users)
 
-R8A: Display search food form. Display a link to the home page or a navigation bar that contains links to other pages.
+lines 167-240 - main.js
+views folder - updatesearch.ejs, updatefood.ejs
 
-R8B: If food found, display all data related to the food found in the database to users in forms so users can update each field. Display a message to the user if not found. Collect form data to be passed to the back-end (database) and store updated food items in the database. Display a message indicating the update operation has been done. 
+updatesearch.ejs file contains the search form and a link to the homepage. updatefood.ejs file contains a form which  displays the extracted data about the searched food item to the users for updation. It also contains a post method which allows the user to type in the unique id that corresponds to the food item to delte an entry from the database.
 
-You can go beyond this requirement by letting ONLY the user who created the same food item update it. [3 marks]
+/updatesearch route is used to render the updatesearch.ejs file. And redirectLogin is used to only allow access for loggedin users to the update page. A validation check is also implemented to check if the search field is left empty.
 
-R8C: Implement a delete button to delete the whole record, when the delete button is pressed, it is good practice to ask 'Are you sure?' and then delete the food item from the database, and display a message indicating the delete has been done. 
+/updatesearch-result route is used to render the updatefood.ejs file. The sql query "SELECT * FROM nutridata WHERE foodprod LIKE '%" + req.query.keyword + "%' AND username = '" + req.session.userId + "'"; is used to obtain the details of the food searched from the database and only display it to the user who had made the food entry to the database. This route also does all the validation and sanitization checks for the food updated by the user before passing it through to the database for storage.But, if the search did not yield a match from the database or if the loggedin user was not the user who created the food entry then the page displays "No data found!" to the user with a link to the homepage. If the updation was done successfully by the original user then a message is displayed indicating the successful updation of the food product and a link to the homepage is provided.
 
-You can go beyond this requirement by letting ONLY the user who created the same food item delete it. [3 marks]
+/deletefoodnow route is used to enable the user who created the food entry into the database to delete the entry from the database. This was made possible using an if else statements and using 2 sql queries.The first SQL query "SELECT username FROM nutridata WHERE id =?"; obtains the username from the table where the food id corresponding to the food being searched for updation is stored. And if the username obtained matches the req.session.userId then the second SQL query "DELETE FROM nutridata WHERE id = ?" is executed, and a message showing successful deletion of entry from database is shown to the user along with a link back to the homepage. If the username does not match the req.session.userId then the user is redirected back to the homepage. This way only the user who made the food entry is allowed to delete the food.
+
 
 R9: List food page (available to all users)
 
@@ -65,9 +60,13 @@ R10: API
 There is a basic API displayed on '/api' route listing all foods stored in the database in JSON format. i.e. food content can also be accessed as JSON via HTTP method, It should be clear how to access the API (this could include comments in code). Additional credit will be given for an API that implements get, post, put and delete.
 
 R11: form validation
-All form data should have validations, examples include checking password length, email validation, integer data is integer and etc. 
-R12: Your dynamic web application must be implemented in Node.js on your virtual server. The back-end of the web application could be MongoDB or MySQL. Make sure you have included comments in your code explaining all sections of the code including database interactions.
+All form data has been validated.
 
+R12: 
+The dynamic web application has been implemented in Node.js on the virtual server. 
+https://doc.gold.ac.uk/usr/684/
+The back-end of the web application is done in MySQL. 
+<img src="2022-12-23 (2).png" alt="Alt text" title="Optional title">
 
 
 ER DIAGRAM
