@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Add Food to <%=shopName%></title>
+    <link rel="stylesheet"  type="text/css" href="main.css" />
+  </head>
+  <body>
+    <h1><%=shopName%>: Add Food</h1>
+    <form method="POST" action="/updatefoodnow">
+      <ul>
+      
+        <% availableFoods.forEach(function(food) { %>
+        <!-- input id of food - disabled so that the user cannot change it -->
+        <input id="id" type="text" name="id" value="<%=food.id %>" disabled/>
+        <p>Name of food product: <input id="name" type="text" name="name" value="<%=food.foodprod %>" /></p>
+        <p>Typical values per: <input id="typical" type="text" name="typical" value="<%=food.typicalvalue %>" /></p>
+        <p>Unit of measurement: <input id="unit" type="text" name="unit" value="<%=food.unit %>" /></p>
+        <p>Carbs: <input id="carbs" type="text" name="carbs" value="<%=food.carbs %>" /></p>
+        <p>Fat: <input id="fat" type="text" name="fat" value="<%=food.fat %>" /></p>
+        <p>Protein: <input id="protein" type="text" name="protein" value="<%=food.protein %>" /></p>
+        <p>Salt: <input id="salt" type="text" name="salt" value="<%=food.salt %>" /></p>
+        <p>Sugar: <input id="sugar" type="text" name="sugar" value="<%=food.Sugar %>" /></p>
+        <input type="submit" value="Update Food" />
+        <% }) %>
+      </form>
+        <!-- Form to implement the deletion of food -->
+        <form method="POST" action="/deletefoodnow">
+          <input id="id" type="text" name="id" value="Enter id to delete entry." />
+          <input type="submit" value="Delete Food" />
+        </form>
+      <!--Home page Link-->
+      <p><a href="./">Home</a></p>
+  </body>
+</html>

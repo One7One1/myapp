@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Welcome to <%=shopName%></title>
+    <link rel="stylesheet"  type="text/css" href="main.css" />
+  </head>
+  <body>
+    <h1><%=shopName%> Shop</h1>
+    <h2>Here are a list of food items that match your search:</h2>
+    <!-- Make table to display the food details from database -->
+    <table>
+      <tr>
+        <th>Food</th>
+        <th>Typical Value of Food</th>
+        <th>Unit of Measurement  </th>
+        <th>Carbohydrates  </th>
+        <th>Fats  </th>
+        <th>Protein  </th>
+        <th>Salt  </th>
+        <th>Sugar  </th>
+      </tr>
+      <% availableFoods.forEach(function(food) { %>
+        <tr>
+        <!-- Extarct data from database to display in table -->
+        <td><%=food.foodprod %></td>
+        <td><%=food.typicalvalue %></td>
+        <td><%=food.unit %></td>
+        <td><%=food.carbs %></td>
+        <td><%=food.fat %></td>
+        <td><%=food.protein %></td>
+        <td><%=food.salt %></td>
+        <td><%=food.Sugar %></td>
+        </tr>     
+      <% }) %>
+    </table>
+    <!--Home page Link-->
+    <p><a href="./">Home</a></p>
+    </body>
+</html>
